@@ -481,13 +481,21 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Trailer\Create.cshtml" />
+    <Content Include="Views\Trailer\Edit.cshtml" />
+    <Content Include="Views\Trailer\Delete.cshtml" />
+    <Content Include="Views\Trailer\Details.cshtml" />
+    <Content Include="Views\Trailer\List.cshtml" />
+    <Content Include="Views\Truck\Create.cshtml" />
+    <Content Include="Views\Truck\Delete.cshtml" />
+    <Content Include="Views\Truck\Details.cshtml" />
+    <Content Include="Views\Truck\Edit.cshtml" />
+    <Content Include="Views\Truck\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Driver\" />
     <Folder Include="Views\Mechanic\" />
-    <Folder Include="Views\Trailer\" />
-    <Folder Include="Views\Truck\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

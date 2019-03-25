@@ -91,7 +91,7 @@ namespace ManagerTracker.Models
         //GET: Mechanic/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(db.People.Find(id));
         }
 
         // POST: Mechanic/Delete/5

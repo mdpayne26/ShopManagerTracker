@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManagerTracker.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,12 @@ namespace ManagerTracker.Controllers
 {
     public class TruckController : Controller
     {
+        ApplicationDbContext db;
+        public TruckController()
+        {
+            db = new ApplicationDbContext();
+        }
+
         // GET: Truck
         public ActionResult Index()
         {
@@ -17,24 +24,26 @@ namespace ManagerTracker.Controllers
         // GET: Truck/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(db.Trucks.Find(id));
         }
 
         // GET: Truck/Create
         public ActionResult Create()
         {
+            ViewBag.ID = new SelectList(db.Trucks, "Id", "TruckNumber");
             return View();
         }
 
         // POST: Truck/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Trucks trucks)
         {
             try
             {
                 // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                db.Trucks.Add(trucks);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
             }
             catch
             {
@@ -45,6 +54,7 @@ namespace ManagerTracker.Controllers
         // GET: Truck/Edit/5
         public ActionResult Edit(int id)
         {
+            List<Trucks> ListofTrucks = db.Trucks.ToList();
             return View();
         }
 
