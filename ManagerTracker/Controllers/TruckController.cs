@@ -60,12 +60,18 @@ namespace ManagerTracker.Controllers
 
         // POST: Truck/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, FormCollection collection,Trucks trucks)
         {
             try
             {
                 // TODO: Add update logic here
-
+                Trucks thisTrucks = db.Trucks.Find(id);
+                thisTrucks.TruckNumber = trucks.TruckNumber;
+                thisTrucks.Year = trucks.Year;
+                thisTrucks.Make = trucks.Make;
+                thisTrucks.Model = trucks.Model;
+                thisTrucks.Vin = trucks.Vin;
+                thisTrucks.EngineSerialNumber = trucks.EngineSerialNumber;
                 return RedirectToAction("Index");
             }
             catch
@@ -77,7 +83,7 @@ namespace ManagerTracker.Controllers
         // GET: Truck/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(db.Trucks.Find(id));
         }
 
         // POST: Truck/Delete/5
@@ -87,7 +93,8 @@ namespace ManagerTracker.Controllers
             try
             {
                 // TODO: Add delete logic here
-
+                db.Trucks.Remove(db.Trucks.Find(id));
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
