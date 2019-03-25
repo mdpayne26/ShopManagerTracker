@@ -255,7 +255,7 @@ namespace ManagerTracker.Controllers
         // POST: /Manage/SetPassword
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
+        public async Task<ActionResult> SetPassword(set model)
         {
             if (ModelState.IsValid)
             {

@@ -13,6 +13,7 @@ namespace ManagerTracker.Controllers
    
     public class RoleController : Controller
     {
+        ApplicationDbContext db;
         //GET: Roles
         public ActionResult Index()
         {
@@ -31,7 +32,7 @@ namespace ManagerTracker.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var Roles = context.Roles.ToList();
+            var Roles = db.Roles.ToList();
             return View(Roles);
             //return View();
         }

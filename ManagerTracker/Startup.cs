@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Owin;
 
+
 [assembly: OwinStartupAttribute(typeof(ManagerTracker.Startup))]
 namespace ManagerTracker
 {
@@ -14,6 +15,10 @@ namespace ManagerTracker
             ConfigureAuth(app);
             createRolesandUsers();
         }
+
+        
+
+       
 
         // In this method we will create default User roles and Admin user for login   
         private void createRolesandUsers()
@@ -77,6 +82,7 @@ namespace ManagerTracker
                 roleManager.Create(role);
 
             }
+
         }
     }
 }
