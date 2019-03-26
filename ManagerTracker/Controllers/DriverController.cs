@@ -20,7 +20,8 @@ namespace ManagerTracker.Controllers
         // GET: Driver
         public ActionResult Index()
         {
-            return View();
+            var peoples = db.People;
+            return View(peoples.ToList());
         }
 
         // GET: Driver/Details/5

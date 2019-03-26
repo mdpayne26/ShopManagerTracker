@@ -18,7 +18,8 @@ namespace ManagerTracker.Models
         // GET: Mechanic
         public ActionResult Index()
         {
-            return View();
+            var peoples = db.People;
+            return View(peoples.ToList());
         }
 
         // GET: Mechanic/Details/5
