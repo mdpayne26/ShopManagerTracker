@@ -1,0 +1,98 @@
+﻿@model ManagerTracker.Models.WorkOrders
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WorkOrders</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.People.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.People.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trailers.TrailerNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trailers.TrailerNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trucks.TruckNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trucks.TruckNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PartNumberOrDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartNumberOrDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PartQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PartPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RepairDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RepairDescription)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

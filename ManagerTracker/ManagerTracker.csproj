@@ -184,28 +184,17 @@
     <Compile Include="Controllers\TrailerController.cs" />
     <Compile Include="Controllers\TruckController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\WorkOrderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903221914078_matts.cs" />
-    <Compile Include="Migrations\201903221914078_matts.Designer.cs">
-      <DependentUpon>201903221914078_matts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903221943346_matt2.cs" />
-    <Compile Include="Migrations\201903221943346_matt2.Designer.cs">
-      <DependentUpon>201903221943346_matt2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903251447202_Events.cs" />
-    <Compile Include="Migrations\201903251447202_Events.Designer.cs">
-      <DependentUpon>201903251447202_Events.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Drivers.cs" />
     <Compile Include="Models\Events.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Controllers\MechanicController.cs" />
-    <Compile Include="Models\People.cs" />
+    <Compile Include="Models\Mechanics.cs" />
     <Compile Include="Models\Trailers.cs" />
     <Compile Include="Models\Trucks.cs" />
     <Compile Include="Models\WorkOrders.cs" />
@@ -501,9 +490,15 @@
     <Content Include="Views\Driver\Create.cshtml" />
     <Content Include="Views\Driver\Details.cshtml" />
     <Content Include="Views\Driver\Index.cshtml" />
+    <Content Include="Views\WorkOrder\Index.cshtml" />
+    <Content Include="Views\WorkOrder\Details.cshtml" />
+    <Content Include="Views\WorkOrder\Create.cshtml" />
+    <Content Include="Views\WorkOrder\Edit.cshtml" />
+    <Content Include="Views\WorkOrder\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -517,17 +512,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903221914078_matts.resx">
-      <DependentUpon>201903221914078_matts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903221943346_matt2.resx">
-      <DependentUpon>201903221943346_matt2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903251447202_Events.resx">
-      <DependentUpon>201903251447202_Events.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

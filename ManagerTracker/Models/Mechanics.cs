@@ -7,7 +7,7 @@ using System.Web;
 
 namespace ManagerTracker.Models
 {
-    public class People
+    public class Mechanics
     {
         [Key]
         public int Id { get; set; }

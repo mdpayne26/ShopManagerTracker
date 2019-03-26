@@ -20,10 +20,12 @@ namespace ManagerTracker.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<People> People { get; set; }
+        public DbSet<Mechanics> Mechanics { get; set; }
+        public DbSet<Drivers> Drivers { get; set; }
         public DbSet<Trailers> Trailers { get; set; }
         public DbSet<Trucks> Trucks { get; set; }
         public DbSet<Events> Events { get; set; }
+        public DbSet<WorkOrders> WorkOrders { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

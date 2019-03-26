@@ -26,10 +26,7 @@ namespace ManagerTracker.Controllers
         // GET: Trailer/Details/5
         public ActionResult Details(int id)
         {
-
-
             return View(db.Trailers.Find(id));
-           
         }
 
         // GET: Trailer/Create

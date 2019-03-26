@@ -1,10 +1,10 @@
-﻿@model IEnumerable<ManagerTracker.Models.People>
+﻿@model IEnumerable<ManagerTracker.Models.Mechanics>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Employees</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -21,7 +21,7 @@
             @Html.DisplayNameFor(model => model.LastName)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.ApplicationUserId)
+            @Html.DisplayNameFor(model => model.Role)
         </th>*@
         <th></th>
     </tr>

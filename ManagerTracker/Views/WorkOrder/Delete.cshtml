@@ -1,0 +1,104 @@
+﻿@model ManagerTracker.Models.WorkOrders
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>WorkOrders</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.People.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.People.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trailers.TrailerNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trailers.TrailerNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trucks.TruckNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trucks.TruckNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PartNumberOrDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartNumberOrDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PartQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PartPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RepairDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RepairDescription)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

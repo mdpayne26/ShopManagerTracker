@@ -18,8 +18,8 @@ namespace ManagerTracker.Models
         // GET: Mechanic
         public ActionResult Index()
         {
-            var peoples = db.People;
-            return View(peoples.ToList());
+            var mechanics = db.Mechanics;
+            return View(mechanics.ToList());
         }
 
         // GET: Mechanic/Details/5
@@ -28,7 +28,7 @@ namespace ManagerTracker.Models
             try
             {
                 string userId = User.Identity.GetUserId();
-                var user = db.People.Where(c => c.ApplicationUserId == userId).Single();
+                var user = db.Mechanics.Where(c => c.ApplicationUserId == userId).Single();
                 return View(user);
             }
             catch
@@ -40,20 +40,20 @@ namespace ManagerTracker.Models
         // GET: Mechanic/Create
         public ActionResult Create()
         {
-            ViewBag.ID = new SelectList(db.People, "Id", "Name");
+            ViewBag.ID = new SelectList(db.Mechanics, "Id", "Name");
             return View();
         }
 
         // POST: Mechanic/Create
         [HttpPost]
-        public ActionResult Create(People person)
+        public ActionResult Create(Mechanics mechanics)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    person.ApplicationUserId = User.Identity.GetUserId();
-                    db.People.Add(person);
+                    mechanics.ApplicationUserId = User.Identity.GetUserId();
+                    db.Mechanics.Add(mechanics);
                     db.SaveChanges();
                 }
                 return RedirectToAction("Index", "Home");
@@ -72,14 +72,14 @@ namespace ManagerTracker.Models
 
         // POST: Mechanic/Edit/5
         [HttpPost]
-        public ActionResult Edit(People person)
+        public ActionResult Edit(Mechanics mechanics)
         {
             var userId = User.Identity.GetUserId();
-            var user = db.People.Where(c => c.ApplicationUserId == userId).Single();
+            var user = db.Mechanics.Where(c => c.ApplicationUserId == userId).Single();
             try
             {
                 // TODO: Add update logic here
-                db.Entry(person).State = EntityState.Modified;
+                db.Entry(mechanics).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -92,7 +92,7 @@ namespace ManagerTracker.Models
         //GET: Mechanic/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(db.People.Find(id));
+            return View(db.Mechanics.Find(id));
         }
 
         // POST: Mechanic/Delete/5
@@ -104,8 +104,8 @@ namespace ManagerTracker.Models
                 // TODO: Add delete logic here
                 if (ModelState.IsValid)
                 {
-                    People person = db.People.Find(id);
-                    db.People.Remove(person);
+                    Mechanics person = db.Mechanics.Find(id);
+                    db.Mechanics.Remove(person);
                     db.SaveChanges();
                 }
                 return RedirectToAction("Index");

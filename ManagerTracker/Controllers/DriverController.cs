@@ -20,8 +20,8 @@ namespace ManagerTracker.Controllers
         // GET: Driver
         public ActionResult Index()
         {
-            var peoples = db.People;
-            return View(peoples.ToList());
+            var drivers = db.Drivers;
+            return View(drivers.ToList());
         }
 
         // GET: Driver/Details/5
@@ -30,7 +30,7 @@ namespace ManagerTracker.Controllers
             try
             {
                 string userId = User.Identity.GetUserId();
-                var user = db.People.Where(c => c.ApplicationUserId == userId).Single();
+                var user = db.Drivers.Where(c => c.ApplicationUserId == userId).Single();
                 return View(user);
             }
             catch
@@ -42,21 +42,21 @@ namespace ManagerTracker.Controllers
         // GET: Driver/Create
         public ActionResult Create()
         {
-            ViewBag.ID = new SelectList(db.People, "Id", "Name");
+            ViewBag.ID = new SelectList(db.Drivers, "Id", "Name");
             return View();
         }
 
         // POST: Driver/Create
         [HttpPost]
-        public ActionResult Create(People person)
+        public ActionResult Create(Drivers drivers)
         {
             try
             {
                 // TODO: Add insert logic here
                 if (ModelState.IsValid)
                 {
-                    person.ApplicationUserId = User.Identity.GetUserId();
-                    db.People.Add(person);
+                    drivers.ApplicationUserId = User.Identity.GetUserId();
+                    db.Drivers.Add(drivers);
                     db.SaveChanges();
                 }
                 return RedirectToAction("Index", "Home");
@@ -75,14 +75,14 @@ namespace ManagerTracker.Controllers
 
         // POST: Driver/Edit/5
         [HttpPost]
-        public ActionResult Edit(People person)
+        public ActionResult Edit(Drivers drivers)
         {
             var userId = User.Identity.GetUserId();
-            var user = db.People.Where(c => c.ApplicationUserId == userId).Single();
+            var user = db.Drivers.Where(c => c.ApplicationUserId == userId).Single();
             try
             {
                 // TODO: Add update logic here
-                db.Entry(person).State = EntityState.Modified;
+                db.Entry(drivers).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -95,7 +95,7 @@ namespace ManagerTracker.Controllers
         // GET: Driver/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(db.People.Find(id));
+            return View(db.Drivers.Find(id));
         }
 
         // POST: Driver/Delete/5
@@ -107,8 +107,8 @@ namespace ManagerTracker.Controllers
                 // TODO: Add delete logic here
                 if (ModelState.IsValid)
                 {
-                    People person = db.People.Find(id);
-                    db.People.Remove(person);
+                    Drivers drivers = db.Drivers.Find(id);
+                    db.Drivers.Remove(drivers);
                     db.SaveChanges();
                 }
                 return RedirectToAction("Index");
