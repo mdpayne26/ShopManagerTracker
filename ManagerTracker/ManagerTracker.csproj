@@ -208,6 +208,7 @@
     <Compile Include="Models\People.cs" />
     <Compile Include="Models\Trailers.cs" />
     <Compile Include="Models\Trucks.cs" />
+    <Compile Include="Models\WorkOrders.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
