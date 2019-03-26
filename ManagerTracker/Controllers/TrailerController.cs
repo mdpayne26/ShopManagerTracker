@@ -19,7 +19,8 @@ namespace ManagerTracker.Controllers
         // GET: Trailer
         public ActionResult Index()
         {
-            return View();
+            var trailers = db.Trailers;
+            return View(trailers.ToList());
         }
 
         // GET: Trailer/Details/5

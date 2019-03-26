@@ -18,7 +18,8 @@ namespace ManagerTracker.Controllers
         // GET: Truck
         public ActionResult Index()
         {
-            return View();
+            var trucks = db.Trucks;
+            return View(trucks.ToList());
         }
 
         // GET: Truck/Details/5
