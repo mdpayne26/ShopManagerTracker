@@ -4,14 +4,14 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>-WorkOrder Create-</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>WorkOrders</h4>
+        <h4></h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -71,7 +71,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MechanicsId, "MechanicsId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.MechanicsId, "Mechanics Id", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("MechanicsId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.MechanicsId, "", new { @class = "text-danger" })
@@ -79,7 +79,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TrucksId, "TrucksId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TrucksId, "Truck Number", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("TrucksId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TrucksId, "", new { @class = "text-danger" })
@@ -87,7 +87,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TrailersId, "TrailersId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TrailersId, "Trailer number", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("TrailersId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TrailersId, "", new { @class = "text-danger" })

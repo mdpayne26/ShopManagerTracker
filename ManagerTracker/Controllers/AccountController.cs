@@ -17,11 +17,11 @@ namespace ManagerTracker.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private ApplicationDbContext context;
+        private ApplicationDbContext db;
 
         public AccountController()
         {
-            context = new ApplicationDbContext();
+            db = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -81,7 +81,27 @@ namespace ManagerTracker.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    var user = db.Users.Where(u => u.Email == model.Email);
+                    var userRole = user.Select(u => u.Roles).Single();
+                    var roleId = userRole.Select(r => r.RoleId).Single();
+                    var role = db.Roles.Where(r => r.Id == roleId).Select(r => r.Name).Single();
+                    var roleText = role.ToString();
+                    string thisUserID = user.Single().Id;
+                    if (roleText == "Manager")
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else if (roleText == "Mechanic")
+                    {
+                        return RedirectToAction("Create", "WorkOrder");
+                    }
+                    else if (roleText == "Driver")
+                    {
+                        return RedirectToAction("Index", "Driver");
+                    }
+                    else return RedirectToAction("Index", "Home");
+
+                    //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -141,7 +161,7 @@ namespace ManagerTracker.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");
+            ViewBag.Name = new SelectList(db.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");
 
             return View();
         }
@@ -169,7 +189,7 @@ namespace ManagerTracker.Controllers
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
                     return RedirectToAction("Index", "Users");
                 }
-                ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");
+                ViewBag.Name = new SelectList(db.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");
 
                 AddErrors(result);
             }

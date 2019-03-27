@@ -180,6 +180,7 @@
     <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\TrailerController.cs" />
     <Compile Include="Controllers\TruckController.cs" />
@@ -200,11 +201,28 @@
     <Compile Include="Migrations\201903271310311_updateWorkOrdersAgain.Designer.cs">
       <DependentUpon>201903271310311_updateWorkOrdersAgain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903271337282_updateTimes.cs" />
+    <Compile Include="Migrations\201903271337282_updateTimes.Designer.cs">
+      <DependentUpon>201903271337282_updateTimes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903271343076_times.cs" />
+    <Compile Include="Migrations\201903271343076_times.Designer.cs">
+      <DependentUpon>201903271343076_times.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903271355518_nullableworkorder.cs" />
+    <Compile Include="Migrations\201903271355518_nullableworkorder.Designer.cs">
+      <DependentUpon>201903271355518_nullableworkorder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903271514328_Workorderstime.cs" />
+    <Compile Include="Migrations\201903271514328_Workorderstime.Designer.cs">
+      <DependentUpon>201903271514328_Workorderstime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Drivers.cs" />
     <Compile Include="Models\Events.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Manager.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Controllers\MechanicController.cs" />
     <Compile Include="Models\Mechanics.cs" />
@@ -511,6 +529,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Manager\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -534,6 +553,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903271310311_updateWorkOrdersAgain.resx">
       <DependentUpon>201903271310311_updateWorkOrdersAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903271337282_updateTimes.resx">
+      <DependentUpon>201903271337282_updateTimes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903271343076_times.resx">
+      <DependentUpon>201903271343076_times.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903271355518_nullableworkorder.resx">
+      <DependentUpon>201903271355518_nullableworkorder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903271514328_Workorderstime.resx">
+      <DependentUpon>201903271514328_Workorderstime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

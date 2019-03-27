@@ -1,7 +1,10 @@
 ﻿using ManagerTracker.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -33,10 +36,14 @@ namespace ManagerTracker.Controllers
             //ViewBag.MechanicsId = new SelectList(db.Mechanics.SelectMany(s => s.FirstName));
             //ViewBag.TrucksId = new SelectList(db.Trucks.SelectMany(t => t.TruckNumber));
             //ViewBag.TrailersId = new SelectList(db.Trailers.SelectMany(r => r.TrailerNumber));
-            ViewBag.MechanicsId = new SelectList(db.Mechanics);
-            ViewBag.TrucksId = new SelectList(db.Trucks);
-            ViewBag.TrailersId = new SelectList(db.Trailers);
-            return View();
+            ViewBag.MechanicsId = new SelectList(db.Mechanics.Select(m=> m.Id));
+            //string userId = User.Identity.GetUserId();
+            //var user = db.Mechanics.Where(m => m.ApplicationUserId == userId).Single();
+            ViewBag.TrucksId = new SelectList(db.Trucks.Select(t=> t.TruckNumber));
+            ViewBag.TrailersId = new SelectList(db.Trailers.Select(r=> r.TrailerNumber));
+            //DateTime localdate = DateTime.Now;
+           
+                return View();
         }
 
         // POST: WorkOrder/Create
@@ -47,7 +54,7 @@ namespace ManagerTracker.Controllers
             {
                 db.WorkOrders.Add(workOrders);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -56,36 +63,31 @@ namespace ManagerTracker.Controllers
         }
 
         // GET: WorkOrder/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            List<WorkOrders> ListofWorkOrders = db.WorkOrders.ToList();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            WorkOrders @workOrders = db.WorkOrders.Find(id);
+            if (@workOrders == null)
+            {
+                return HttpNotFound();
+            }
             return View();
         }
 
         // POST: WorkOrder/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection, WorkOrders workOrders)
+        public ActionResult Edit([Bind(Include = "Id,Date,StartTime,EndTime,PartQuantity,PartPrice,PartNumberOrDescription,RepairDescription,MechanicsId,TrucksId,TrailersId")]WorkOrders @workOrders)
         {
-            try
+           if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-                WorkOrders thisworkOrders = db.WorkOrders.Find(id);
-                thisworkOrders.Date = workOrders.Date;
-                thisworkOrders.StartTime = workOrders.StartTime;
-                thisworkOrders.EndTime = workOrders.EndTime;
-                thisworkOrders.PartNumberOrDescription = workOrders.PartNumberOrDescription;
-                thisworkOrders.PartQuantity = workOrders.PartQuantity;
-                thisworkOrders.PartPrice = workOrders.PartPrice;
-                thisworkOrders.RepairDescription = workOrders.RepairDescription;
-                thisworkOrders.MechanicsId = workOrders.MechanicsId;
-                thisworkOrders.TrucksId = workOrders.TrucksId;
-                thisworkOrders.TrailersId = workOrders.TrailersId;
+                db.Entry(@workOrders).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: WorkOrder/Delete/5
