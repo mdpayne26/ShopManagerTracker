@@ -93,7 +93,7 @@ namespace ManagerTracker.Controllers
                     }
                     else if (roleText == "Mechanic")
                     {
-                        return RedirectToAction("Create", "WorkOrder");
+                        return RedirectToAction("Index", "WorkOrder");
                     }
                     else if (roleText == "Driver")
                     {
