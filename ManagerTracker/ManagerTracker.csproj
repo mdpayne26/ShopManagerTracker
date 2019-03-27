@@ -188,6 +188,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903261649508_updateModels.cs" />
+    <Compile Include="Migrations\201903261649508_updateModels.Designer.cs">
+      <DependentUpon>201903261649508_updateModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903261914385_updateWorkorders.cs" />
+    <Compile Include="Migrations\201903261914385_updateWorkorders.Designer.cs">
+      <DependentUpon>201903261914385_updateWorkorders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903271310311_updateWorkOrdersAgain.cs" />
+    <Compile Include="Migrations\201903271310311_updateWorkOrdersAgain.Designer.cs">
+      <DependentUpon>201903271310311_updateWorkOrdersAgain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Drivers.cs" />
     <Compile Include="Models\Events.cs" />
@@ -498,7 +511,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -512,6 +524,17 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201903261649508_updateModels.resx">
+      <DependentUpon>201903261649508_updateModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903261914385_updateWorkorders.resx">
+      <DependentUpon>201903261914385_updateWorkorders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903271310311_updateWorkOrdersAgain.resx">
+      <DependentUpon>201903271310311_updateWorkOrdersAgain.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

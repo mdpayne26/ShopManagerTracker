@@ -30,7 +30,12 @@ namespace ManagerTracker.Controllers
         // GET: WorkOrder/Create
         public ActionResult Create()
         {
-            ViewBag.ID = new SelectList(db.WorkOrders, "Id", "Date");
+            //ViewBag.MechanicsId = new SelectList(db.Mechanics.SelectMany(s => s.FirstName));
+            //ViewBag.TrucksId = new SelectList(db.Trucks.SelectMany(t => t.TruckNumber));
+            //ViewBag.TrailersId = new SelectList(db.Trailers.SelectMany(r => r.TrailerNumber));
+            ViewBag.MechanicsId = new SelectList(db.Mechanics);
+            ViewBag.TrucksId = new SelectList(db.Trucks);
+            ViewBag.TrailersId = new SelectList(db.Trailers);
             return View();
         }
 
@@ -72,9 +77,9 @@ namespace ManagerTracker.Controllers
                 thisworkOrders.PartQuantity = workOrders.PartQuantity;
                 thisworkOrders.PartPrice = workOrders.PartPrice;
                 thisworkOrders.RepairDescription = workOrders.RepairDescription;
-                thisworkOrders.MechanicId = workOrders.MechanicId;
-                thisworkOrders.TruckId = workOrders.TruckId;
-                thisworkOrders.TrailerId = workOrders.TrailerId;
+                thisworkOrders.MechanicsId = workOrders.MechanicsId;
+                thisworkOrders.TrucksId = workOrders.TrucksId;
+                thisworkOrders.TrailersId = workOrders.TrailersId;
                 return RedirectToAction("Index");
             }
             catch

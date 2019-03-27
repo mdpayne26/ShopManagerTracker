@@ -16,16 +16,17 @@ namespace ManagerTracker.Models
         public string PartQuantity { get; set; }
         public string PartPrice { get; set; }
         public string RepairDescription { get; set; }
-        [ForeignKey("People")]
-        public int MechanicId { get; set; }
-        public Mechanics People { get; set; }
+
+        [ForeignKey("Mechanics")]
+        public int MechanicsId { get; set; }
+        public Mechanics Mechanics { get; set; }
+
         [ForeignKey("Trucks")]
-        public int TruckId { get; set; }
+        public int TrucksId { get; set; }
         public Trucks Trucks { get; set; }
+
         [ForeignKey("Trailers")]
-        public int TrailerId { get; set; }
+        public int TrailersId { get; set; }
         public Trailers Trailers { get; set; }
-
-
     }
 }

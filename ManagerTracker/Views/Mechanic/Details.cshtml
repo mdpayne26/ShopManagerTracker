@@ -1,4 +1,4 @@
-﻿@model ManagerTracker.Models.People
+﻿@model ManagerTracker.Models.Mechanics
 
 @{
     ViewBag.Title = "Details";
@@ -10,14 +10,6 @@
     <h4>People</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
@@ -33,9 +25,6 @@
         <dd>
             @Html.DisplayFor(model => model.LastName)
         </dd>
-
-
-
     </dl>
 </div>
 <p>

@@ -56,11 +56,11 @@ namespace ManagerTracker.Models
                     db.Mechanics.Add(mechanics);
                     db.SaveChanges();
                 }
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("Index");
             }
         }
 
