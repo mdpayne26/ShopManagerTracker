@@ -217,6 +217,14 @@
     <Compile Include="Migrations\201903271514328_Workorderstime.Designer.cs">
       <DependentUpon>201903271514328_Workorderstime.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903271626173_Manager.cs" />
+    <Compile Include="Migrations\201903271626173_Manager.Designer.cs">
+      <DependentUpon>201903271626173_Manager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903271631020_ManagerForeignKey.cs" />
+    <Compile Include="Migrations\201903271631020_ManagerForeignKey.Designer.cs">
+      <DependentUpon>201903271631020_ManagerForeignKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Drivers.cs" />
@@ -526,10 +534,13 @@
     <Content Include="Views\WorkOrder\Create.cshtml" />
     <Content Include="Views\WorkOrder\Edit.cshtml" />
     <Content Include="Views\WorkOrder\Delete.cshtml" />
+    <Content Include="Views\Manager\Details.cshtml" />
+    <Content Include="Views\Manager\Create.cshtml" />
+    <Content Include="Views\Manager\Edit.cshtml" />
+    <Content Include="Views\Manager\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Manager\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -565,6 +576,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903271514328_Workorderstime.resx">
       <DependentUpon>201903271514328_Workorderstime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903271626173_Manager.resx">
+      <DependentUpon>201903271626173_Manager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903271631020_ManagerForeignKey.resx">
+      <DependentUpon>201903271631020_ManagerForeignKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

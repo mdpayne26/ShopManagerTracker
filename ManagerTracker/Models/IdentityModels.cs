@@ -26,6 +26,7 @@ namespace ManagerTracker.Models
         public DbSet<Trucks> Trucks { get; set; }
         public DbSet<Events> Events { get; set; }
         public DbSet<WorkOrders> WorkOrders { get; set; }
+        public DbSet<Manager> Manager { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

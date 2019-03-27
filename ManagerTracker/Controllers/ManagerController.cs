@@ -1,5 +1,8 @@
-﻿using System;
+﻿using ManagerTracker.Models;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,6 +11,12 @@ namespace ManagerTracker.Controllers
 {
     public class ManagerController : Controller
     {
+        ApplicationDbContext db;
+        public ManagerController()
+        {
+            db = new ApplicationDbContext();
+        }
+
         // GET: Manager
         public ActionResult Index()
         {
@@ -17,28 +26,43 @@ namespace ManagerTracker.Controllers
         // GET: Manager/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            try
+            {
+                string userId = User.Identity.GetUserId();
+                var user = db.Manager.Where(m => m.ApplicationUserId == userId).Single();
+                return View(user);
+                //return View();
+            }
+            catch
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         // GET: Manager/Create
         public ActionResult Create()
         {
+            ViewBag.ID = new SelectList(db.Manager, "Id", "Name");
             return View();
         }
 
         // POST: Manager/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Manager manager)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                if (ModelState.IsValid)
+                {
+                    manager.ApplicationUserId = User.Identity.GetUserId();
+                    db.Manager.Add(manager);
+                    db.SaveChanges();
+                }
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("Index");
             }
         }
 
@@ -50,12 +74,14 @@ namespace ManagerTracker.Controllers
 
         // POST: Manager/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Manager manager)
         {
+            var userId = User.Identity.GetUserId();
+            var user = db.Manager.Where(c => c.ApplicationUserId == userId).Single();
             try
             {
-                // TODO: Add update logic here
-
+                db.Entry(manager).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -76,8 +102,12 @@ namespace ManagerTracker.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-
+                if (ModelState.IsValid)
+                {
+                    Manager manager = db.Manager.Find(id);
+                    db.Manager.Remove(manager);
+                    db.SaveChanges();
+                }
                 return RedirectToAction("Index");
             }
             catch
