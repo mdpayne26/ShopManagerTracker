@@ -20,8 +20,15 @@ namespace ManagerTracker.Controllers
         // GET: WorkOrder
         public ActionResult Index()
         {
-            var workOrders = db.WorkOrders;
-            return View(workOrders.ToList());
+            var workOrders = db.WorkOrders.ToList();
+            foreach(WorkOrders poop in workOrders)
+            {
+                poop.Trucks = db.Trucks.Where(p => p.Id == poop.TrucksId).Single();
+                poop.Trailers = db.Trailers.Where(s => s.Id == poop.TrailersId).Single();
+                poop.Mechanics = db.Mechanics.Where(m => m.Id == poop.MechanicsId).Single();
+            }
+            
+            return View(workOrders);
         }
 
         // GET: WorkOrder/Details/5
@@ -34,32 +41,55 @@ namespace ManagerTracker.Controllers
         public ActionResult Create()
         {
             //ViewBag.MechanicsId = new SelectList(db.Mechanics.SelectMany(s => s.FirstName));
-            //ViewBag.TrucksId = new SelectList(db.Trucks.SelectMany(t => t.TruckNumber));
-            //ViewBag.TrailersId = new SelectList(db.Trailers.SelectMany(r => r.TrailerNumber));
-            ViewBag.MechanicsId = new SelectList(db.Mechanics.Select(m=> m.Id));
+            //ViewBag.TrucksId = new SelectList(db.Trucks.SelectMany(t => t.Number));
+            //ViewBag.TrailersId = new SelectList(db.Trailers.SelectMany(r => r.Number));
             //string userId = User.Identity.GetUserId();
             //var user = db.Mechanics.Where(m => m.ApplicationUserId == userId).Single();
-            ViewBag.TrucksId = new SelectList(db.Trucks.Select(t=> t.TruckNumber));
-            ViewBag.TrailersId = new SelectList(db.Trailers.Select(r=> r.TrailerNumber));
-            //DateTime localdate = DateTime.Now;
-           
-                return View();
+            ViewBag.MechanicsId = new SelectList(db.Mechanics.Select(m => m.Id));
+            ViewBag.TrucksId = new SelectList(db.Trucks.Select(t=> t.Number));
+            ViewBag.TrailersId = new SelectList(db.Trailers.Select(r=> r.Number));
+            return View();
         }
 
         // POST: WorkOrder/Create
         [HttpPost]
-        public ActionResult Create(WorkOrders workOrders)
+        public ActionResult Create(WorkOrders workOrders, int MechanicsId, string TrucksId, string TrailersId)
         {
+
+            //db.WorkOrders.Add(workOrders);
+            //db.SaveChanges();
+            //return RedirectToAction("Index");
             try
             {
-                db.WorkOrders.Add(workOrders);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //workOrders.TrucksId = db.Trucks.Where(t => t.Id == TrucksId).
+                workOrders.TrucksId = db.Trucks.Where(t => t.Number == TrucksId).Single().Id;
+                workOrders.TrailersId = db.Trailers.Where(r => r.Number == TrailersId).Single().Id;
+                workOrders.MechanicsId = MechanicsId;
+                if (true)
+                {
+                    db.WorkOrders.Add(workOrders);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                else
+                {
+                    foreach (var obj in ModelState.Values)
+                    {
+                        foreach (var error in obj.Errors)
+                        {
+                            if (!string.IsNullOrEmpty(error.ErrorMessage))
+                                System.Diagnostics.Debug.WriteLine("ERROR WHY = " + error.ErrorMessage);
+                        }
+                    }
+                }
             }
             catch
             {
                 return View();
             }
+
+            return View();
         }
 
         // GET: WorkOrder/Edit/5

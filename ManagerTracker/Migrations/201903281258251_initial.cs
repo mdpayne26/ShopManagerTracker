@@ -3,7 +3,7 @@ namespace ManagerTracker.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class updateModels : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -93,6 +93,19 @@ namespace ManagerTracker.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.Managers",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        FirstName = c.String(),
+                        LastName = c.String(),
+                        ApplicationUserId = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId)
+                .Index(t => t.ApplicationUserId);
+            
+            CreateTable(
                 "dbo.Mechanics",
                 c => new
                     {
@@ -120,7 +133,7 @@ namespace ManagerTracker.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        TrailerNumber = c.String(),
+                        Number = c.String(),
                         Year = c.Int(),
                         Make = c.String(),
                         Model = c.String(),
@@ -133,7 +146,7 @@ namespace ManagerTracker.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        TruckNumber = c.String(),
+                        Number = c.String(),
                         Year = c.Int(),
                         Make = c.String(),
                         Model = c.String(),
@@ -150,40 +163,42 @@ namespace ManagerTracker.Migrations
                         Date = c.DateTime(nullable: false),
                         StartTime = c.DateTime(nullable: false),
                         EndTime = c.DateTime(nullable: false),
-                        PartNumberOrDescription = c.String(),
                         PartQuantity = c.String(),
                         PartPrice = c.String(),
+                        PartNumberOrDescription = c.String(),
                         RepairDescription = c.String(),
-                        MechanicId = c.Int(nullable: false),
-                        TruckId = c.Int(nullable: false),
-                        TrailerId = c.Int(nullable: false),
+                        MechanicsId = c.Int(nullable: false),
+                        TrucksId = c.Int(),
+                        TrailersId = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Mechanics", t => t.MechanicId, cascadeDelete: true)
-                .ForeignKey("dbo.Trailers", t => t.TrailerId, cascadeDelete: true)
-                .ForeignKey("dbo.Trucks", t => t.TruckId, cascadeDelete: true)
-                .Index(t => t.MechanicId)
-                .Index(t => t.TruckId)
-                .Index(t => t.TrailerId);
+                .ForeignKey("dbo.Mechanics", t => t.MechanicsId, cascadeDelete: true)
+                .ForeignKey("dbo.Trailers", t => t.TrailersId)
+                .ForeignKey("dbo.Trucks", t => t.TrucksId)
+                .Index(t => t.MechanicsId)
+                .Index(t => t.TrucksId)
+                .Index(t => t.TrailersId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.WorkOrders", "TruckId", "dbo.Trucks");
-            DropForeignKey("dbo.WorkOrders", "TrailerId", "dbo.Trailers");
-            DropForeignKey("dbo.WorkOrders", "MechanicId", "dbo.Mechanics");
+            DropForeignKey("dbo.WorkOrders", "TrucksId", "dbo.Trucks");
+            DropForeignKey("dbo.WorkOrders", "TrailersId", "dbo.Trailers");
+            DropForeignKey("dbo.WorkOrders", "MechanicsId", "dbo.Mechanics");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Mechanics", "ApplicationUserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Managers", "ApplicationUserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Drivers", "ApplicationUserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropIndex("dbo.WorkOrders", new[] { "TrailerId" });
-            DropIndex("dbo.WorkOrders", new[] { "TruckId" });
-            DropIndex("dbo.WorkOrders", new[] { "MechanicId" });
+            DropIndex("dbo.WorkOrders", new[] { "TrailersId" });
+            DropIndex("dbo.WorkOrders", new[] { "TrucksId" });
+            DropIndex("dbo.WorkOrders", new[] { "MechanicsId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Mechanics", new[] { "ApplicationUserId" });
+            DropIndex("dbo.Managers", new[] { "ApplicationUserId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
@@ -195,6 +210,7 @@ namespace ManagerTracker.Migrations
             DropTable("dbo.Trailers");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Mechanics");
+            DropTable("dbo.Managers");
             DropTable("dbo.Events");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");

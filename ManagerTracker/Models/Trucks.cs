@@ -10,7 +10,7 @@ namespace ManagerTracker.Models
     {
         [Key]
         public int Id { get; set; }
-        public string TruckNumber { get; set; }
+        public string Number { get; set; }
         public int? Year { get; set; }
         public string Make { get; set; }
         public string Model { get; set; }

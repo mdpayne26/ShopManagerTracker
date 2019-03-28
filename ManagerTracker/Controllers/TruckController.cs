@@ -31,7 +31,7 @@ namespace ManagerTracker.Controllers
         // GET: Truck/Create
         public ActionResult Create()
         {
-            ViewBag.ID = new SelectList(db.Trucks, "Id", "TruckNumber");
+            ViewBag.ID = new SelectList(db.Trucks, "Id", "Number");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace ManagerTracker.Controllers
             {
                 // TODO: Add update logic here
                 Trucks thisTrucks = db.Trucks.Find(id);
-                thisTrucks.TruckNumber = trucks.TruckNumber;
+                thisTrucks.Number = trucks.Number;
                 thisTrucks.Year = trucks.Year;
                 thisTrucks.Make = trucks.Make;
                 thisTrucks.Model = trucks.Model;

@@ -189,41 +189,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903261649508_updateModels.cs" />
-    <Compile Include="Migrations\201903261649508_updateModels.Designer.cs">
-      <DependentUpon>201903261649508_updateModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903261914385_updateWorkorders.cs" />
-    <Compile Include="Migrations\201903261914385_updateWorkorders.Designer.cs">
-      <DependentUpon>201903261914385_updateWorkorders.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903271310311_updateWorkOrdersAgain.cs" />
-    <Compile Include="Migrations\201903271310311_updateWorkOrdersAgain.Designer.cs">
-      <DependentUpon>201903271310311_updateWorkOrdersAgain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903271337282_updateTimes.cs" />
-    <Compile Include="Migrations\201903271337282_updateTimes.Designer.cs">
-      <DependentUpon>201903271337282_updateTimes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903271343076_times.cs" />
-    <Compile Include="Migrations\201903271343076_times.Designer.cs">
-      <DependentUpon>201903271343076_times.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903271355518_nullableworkorder.cs" />
-    <Compile Include="Migrations\201903271355518_nullableworkorder.Designer.cs">
-      <DependentUpon>201903271355518_nullableworkorder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903271514328_Workorderstime.cs" />
-    <Compile Include="Migrations\201903271514328_Workorderstime.Designer.cs">
-      <DependentUpon>201903271514328_Workorderstime.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903271626173_Manager.cs" />
-    <Compile Include="Migrations\201903271626173_Manager.Designer.cs">
-      <DependentUpon>201903271626173_Manager.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903271631020_ManagerForeignKey.cs" />
-    <Compile Include="Migrations\201903271631020_ManagerForeignKey.Designer.cs">
-      <DependentUpon>201903271631020_ManagerForeignKey.cs</DependentUpon>
+    <Compile Include="Migrations\201903281258251_initial.cs" />
+    <Compile Include="Migrations\201903281258251_initial.Designer.cs">
+      <DependentUpon>201903281258251_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -556,32 +524,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903261649508_updateModels.resx">
-      <DependentUpon>201903261649508_updateModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903261914385_updateWorkorders.resx">
-      <DependentUpon>201903261914385_updateWorkorders.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903271310311_updateWorkOrdersAgain.resx">
-      <DependentUpon>201903271310311_updateWorkOrdersAgain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903271337282_updateTimes.resx">
-      <DependentUpon>201903271337282_updateTimes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903271343076_times.resx">
-      <DependentUpon>201903271343076_times.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903271355518_nullableworkorder.resx">
-      <DependentUpon>201903271355518_nullableworkorder.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903271514328_Workorderstime.resx">
-      <DependentUpon>201903271514328_Workorderstime.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903271626173_Manager.resx">
-      <DependentUpon>201903271626173_Manager.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903271631020_ManagerForeignKey.resx">
-      <DependentUpon>201903271631020_ManagerForeignKey.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903281258251_initial.resx">
+      <DependentUpon>201903281258251_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

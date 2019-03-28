@@ -32,7 +32,7 @@ namespace ManagerTracker.Controllers
         // GET: Trailer/Create
         public ActionResult Create()
         {
-            ViewBag.ID = new SelectList(db.Trailers, "Id", "TrailerNumber");
+            ViewBag.ID = new SelectList(db.Trailers, "Id", "Number");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace ManagerTracker.Controllers
             {
                 // TODO: Add update logic here
                 Trailers thistrailers = db.Trailers.Find(id);
-                thistrailers.TrailerNumber = trailers.TrailerNumber;
+                thistrailers.Number = trailers.Number;
                 thistrailers.Year = trailers.Year;
                 thistrailers.Make = trailers.Make;
                 thistrailers.Model = trailers.Model;
