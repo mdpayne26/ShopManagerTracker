@@ -21,30 +21,29 @@ namespace ManagerTracker.Controllers
         public ActionResult Index()
         {
             var workOrders = db.WorkOrders.ToList();
-            foreach(WorkOrders poop in workOrders)
+            foreach (WorkOrders workorder in workOrders)
             {
-                poop.Trucks = db.Trucks.Where(p => p.Id == poop.TrucksId).Single();
-                poop.Trailers = db.Trailers.Where(s => s.Id == poop.TrailersId).Single();
-                poop.Mechanics = db.Mechanics.Where(m => m.Id == poop.MechanicsId).Single();
+                workorder.Trucks = db.Trucks.Where(p => p.Id == workorder.TrucksId).Single();
+                workorder.Trailers = db.Trailers.Where(s => s.Id == workorder.TrailersId).Single();
+                workorder.Mechanics = db.Mechanics.Where(m => m.Id == workorder.MechanicsId).Single();
             }
-            
             return View(workOrders);
         }
 
         // GET: WorkOrder/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, WorkOrders workorder)
         {
+            
+                workorder.Trucks = db.Trucks.Where(p => p.Id == workorder.TrucksId).Single();
+                workorder.Trailers = db.Trailers.Where(s => s.Id == workorder.TrailersId).Single();
+                workorder.Mechanics = db.Mechanics.Where(m => m.Id == workorder.MechanicsId).Single();
+            
             return View(db.WorkOrders.Find(id));
         }
 
         // GET: WorkOrder/Create
         public ActionResult Create()
         {
-            //ViewBag.MechanicsId = new SelectList(db.Mechanics.SelectMany(s => s.FirstName));
-            //ViewBag.TrucksId = new SelectList(db.Trucks.SelectMany(t => t.Number));
-            //ViewBag.TrailersId = new SelectList(db.Trailers.SelectMany(r => r.Number));
-            //string userId = User.Identity.GetUserId();
-            //var user = db.Mechanics.Where(m => m.ApplicationUserId == userId).Single();
             ViewBag.MechanicsId = new SelectList(db.Mechanics.Select(m => m.Id));
             ViewBag.TrucksId = new SelectList(db.Trucks.Select(t=> t.Number));
             ViewBag.TrailersId = new SelectList(db.Trailers.Select(r=> r.Number));
@@ -55,36 +54,28 @@ namespace ManagerTracker.Controllers
         [HttpPost]
         public ActionResult Create(WorkOrders workOrders, int MechanicsId, string TrucksId, string TrailersId)
         {
-
-            //db.WorkOrders.Add(workOrders);
-            //db.SaveChanges();
-            //return RedirectToAction("Index");
-            try
+            workOrders.TrucksId = db.Trucks.Where(t => t.Number == TrucksId).Single().Id;
+            workOrders.TrailersId = db.Trailers.Where(r => r.Number == TrailersId).Single().Id;
+            workOrders.MechanicsId = MechanicsId;
+            if (true)
             {
-                //workOrders.TrucksId = db.Trucks.Where(t => t.Id == TrucksId).
-                workOrders.TrucksId = db.Trucks.Where(t => t.Number == TrucksId).Single().Id;
-                workOrders.TrailersId = db.Trailers.Where(r => r.Number == TrailersId).Single().Id;
-                workOrders.MechanicsId = MechanicsId;
-                if (true)
-                {
-                    db.WorkOrders.Add(workOrders);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                db.WorkOrders.Add(workOrders);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
-                else
+            else
+            {
+                foreach (var obj in ModelState.Values)
                 {
-                    foreach (var obj in ModelState.Values)
+                    foreach (var error in obj.Errors)
                     {
-                        foreach (var error in obj.Errors)
-                        {
-                            if (!string.IsNullOrEmpty(error.ErrorMessage))
-                                System.Diagnostics.Debug.WriteLine("ERROR WHY = " + error.ErrorMessage);
-                        }
+                        if (!string.IsNullOrEmpty(error.ErrorMessage))
+                            System.Diagnostics.Debug.WriteLine("ERROR WHY = " + error.ErrorMessage);
                     }
                 }
             }
-            catch
+            
             {
                 return View();
             }
@@ -104,14 +95,20 @@ namespace ManagerTracker.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.MechanicsId = new SelectList(db.Mechanics.Select(m => m.Id));
+            ViewBag.TrucksId = new SelectList(db.Trucks.Select(t => t.Number));
+            ViewBag.TrailersId = new SelectList(db.Trailers.Select(r => r.Number));
             return View();
         }
 
         // POST: WorkOrder/Edit/5
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "Id,Date,StartTime,EndTime,PartQuantity,PartPrice,PartNumberOrDescription,RepairDescription,MechanicsId,TrucksId,TrailersId")]WorkOrders @workOrders)
+        public ActionResult Edit(int MechanicsId, string TrucksId, string TrailersId, [Bind(Include = "Id,Date,StartTime,EndTime,PartQuantity,PartPrice,PartNumberOrDescription,RepairDescription,MechanicsId,TrucksId,TrailersId")]WorkOrders @workOrders)
         {
-           if (ModelState.IsValid)
+            workOrders.TrucksId = db.Trucks.Where(t => t.Number == TrucksId).Single().Id;
+            workOrders.TrailersId = db.Trailers.Where(r => r.Number == TrailersId).Single().Id;
+            workOrders.MechanicsId = MechanicsId;
+            if (true)
             {
                 db.Entry(@workOrders).State = EntityState.Modified;
                 db.SaveChanges();
