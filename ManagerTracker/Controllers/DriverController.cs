@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -66,6 +67,50 @@ namespace ManagerTracker.Controllers
                 return View();
             }
         }
+        
+        public ActionResult DistanceCreate()
+        {
+            return View();
+        }
+        //GET:
+        //public GoogleDistanceMatrixApi(string[] originAddresses, string[] destinationAddresses)
+        //{
+        //    OriginAddresses = originAddresses;
+        //    DestinationAddresses = destinationAddresses;
+
+        //    var appSettings = ConfigurationManager.AppSettings;
+
+        //    if (string.IsNullOrEmpty(appSettings["GoogleDistanceMatrixApiUrl"]))
+        //    {
+        //        throw new Exception("GoogleDistanceMatrixApiUrl is not set in AppSettings.");
+        //    }
+        //    Url = appSettings["GoogleDistanceMatrixApiUrl"];
+
+        //    if (string.IsNullOrEmpty(appSettings["GoogleDistanceMatrixApiKey"]))
+        //    {
+        //        throw new Exception("GoogleDistanceMatrixApiKey is not set in AppSettings.");
+        //    }
+        //    Key = appSettings["GoogleDistanceMatrixApiKey"];
+        //    return View();
+        //}
+       
+        [HttpPost]
+        public ActionResult DistanceCreate(int id)
+        {
+            return View();
+        }
+        //POST:
+        //[HttpPost]
+        //private string GetRequestUrl()
+        //{
+        //    OriginAddresses = OriginAddresses.Select(HttpUtility.UrlEncode).ToArray();
+        //    var origins = string.Join("|", OriginAddresses);
+        //    DestinationAddresses = DestinationAddresses.Select(HttpUtility.UrlEncode).ToArray();
+        //    var destinations = string.Join("|", DestinationAddresses);
+        //    return $"{Url}?origins={origins}&destinations={destinations}&key={Key}";
+        //}
+            
+        
 
         // GET: Driver/Edit/5
         public ActionResult Edit(int id)
