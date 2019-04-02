@@ -72,9 +72,9 @@
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwO1MatEZ-C6o0Q9jjCFsEkI1myPuAph0&callback=initMap">
     </script>
-    <form action="/action_page.php">
+    <form action="~/Views/Home/Index.cshtml" target="_blank" method="POST">
         <fieldset>
-            <legend>Repair information</legend>
+            @*<legend>Repair information</legend>*@
             Truck Number:<br>
             <input type="text" name="TruckNumber" value="PJ 1">
             <br>
@@ -93,6 +93,6 @@
 </body>
 </html>
 
-<div>
+@*<div>
     @Html.ActionLink("Back to List", "Index")
-</div>
+</div>*@
