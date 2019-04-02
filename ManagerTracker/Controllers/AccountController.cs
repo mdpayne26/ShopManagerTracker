@@ -97,7 +97,7 @@ namespace ManagerTracker.Controllers
                     }
                     else if (roleText == "Driver")
                     {
-                        return RedirectToAction("Index", "Driver");
+                        return RedirectToAction("DistanceCreate", "Driver");
                     }
                     else return RedirectToAction("Index", "Home");
 
