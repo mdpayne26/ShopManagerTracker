@@ -77,11 +77,11 @@ namespace ManagerTracker.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    var user = db.Users.Where(u => u.Email == model.Email);
+                    var user = db.Users.Where(u => u.UserName == model.UserName);
                     var userRole = user.Select(u => u.Roles).Single();
                     var roleId = userRole.Select(r => r.RoleId).Single();
                     var role = db.Roles.Where(r => r.Id == roleId).Select(r => r.Name).Single();
@@ -187,7 +187,16 @@ namespace ManagerTracker.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
-                    return RedirectToAction("Index", "Users");
+
+                    if (model.UserRoles == "Mechanic")
+                    {
+                        return RedirectToAction("Create", "Mechanic");
+                    }
+                    else if (model.UserRoles == "Driver")
+                    {
+                        return RedirectToAction("Create", "Driver");
+                    }
+                    return RedirectToAction("Index", "Home");
                 }
                 ViewBag.Name = new SelectList(db.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");
 

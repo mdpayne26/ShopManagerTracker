@@ -8,71 +8,69 @@
 <html>
 <head>
     <h4>Repair Slip</h4>
-    <title>Geolocation</title>
+    @*<title>Geolocation</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
-         /*Always set the map height explicitly to define the size of the div
-        * element that contains the map.*/ 
-        /*#map {
+         Always set the map height explicitly to define the size of the div
+        * element that contains the map. 
+        #map {
             height: 10%;
-        }*/
-         /*Optional: Makes the sample page fill the window.*/ 
-        /*html, body {
+        }
+         Optional: Makes the sample page fill the window. 
+        html, body {
             height: 100%;
             margin: 0;
             padding: 0;
-        }*/
-    </style>
+        }
+    </style>*@
 </head>
 <body>
-    <div id="map"></div>
+    @*<div id="map"></div>*@
+    <button onclick="getLocation()">Get Location</button>
+    <p id="demo"></p>
     <script>
-        // Note: This example requires that you consent to location sharing when
-        // prompted by your browser. If you see the error "The Geolocation service
-        // failed.", it means you probably did not give permission for the browser to
-        // locate you.
-        var map, infoWindow;
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: -34.397, lng: 150.644 },
-                zoom: 6
-            });
-            infoWindow = new google.maps.InfoWindow;
+        var x = document.getElementById("demo");
 
-            // Try HTML5 geolocation.
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    var pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-
-                    infoWindow.setPosition(pos);
-                    infoWindow.setContent('Location found.');
-                    infoWindow.open(map);
-                    map.setCenter(pos);
-                }, function () {
-                    handleLocationError(true, infoWindow, map.getCenter());
-                });
-            } else {
-                // Browser doesn't support Geolocation
-                handleLocationError(false, infoWindow, map.getCenter());
+        function getLocation()
+        {
+            if (navigator.geolocation)
+            {
+                navigator.geolocation.watchPosition(showPosition);
+            }
+            else
+            {
+                x.innerHTML = "Geolocation is not supported by this browser.";
             }
         }
 
-        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-            infoWindow.setPosition(pos);
-            infoWindow.setContent(browserHasGeolocation ?
-                'Error: The Geolocation service failed.' :
-                'Error: Your browser doesnt support geolocation.');
-            infoWindow.open(map);
+        function showPosition(position)
+        {
+            x.innerHTML = "Latitude: " + position.coords.latitude +
+                "<br>Longitude: " + position.coords.longitude;
+        }
+
+        function showError(error)
+        {
+            switch (error.code)
+            {
+                case error.PERMISSION_DENIED:
+                    x.innerHTML = "User denied the request for Geolocation."
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    x.innerHTML = "Location information is unavailable."
+                    break;
+                case error.TIMEOUT:
+                    x.innerHTML = "The request to get user location timed out."
+                    break;
+                case error.UNKNOWN_ERROR:
+                    x.innerHTML = "An unknown error occurred."
+                    break;
+            }
         }
     </script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwO1MatEZ-C6o0Q9jjCFsEkI1myPuAph0&callback=initMap">
-    </script>
-    <form action="~/Views/Home/Index.cshtml" target="_blank" method="POST">
+
+    <form action="/action_page.php" target="_blank" method="POST">
         <fieldset>
             @*<legend>Repair information</legend>*@
             Truck Number:<br>
@@ -88,6 +86,62 @@
         </fieldset>
     </form>
 
+
+
+
+
+
+
+    @*<script>
+            // Note: This example requires that you consent to location sharing when
+            // prompted by your browser. If you see the error "The Geolocation service
+            // failed.", it means you probably did not give permission for the browser to
+            // locate you.
+            var map, infoWindow;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'),
+                    {
+                        center: { lat: 43.045850, lng: -88.240250 },
+                        zoom: 6
+                    });
+                infoWindow = new google.maps.InfoWindow;
+
+                // Try HTML5 geolocation.
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var pos =
+                        {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+
+                        infoWindow.setPosition(pos);
+                        infoWindow.setContent('Location found.');
+                        infoWindow.open(map);
+                        map.setCenter(pos);
+                    },
+                        function () {
+                            handleLocationError(true, infoWindow, map.getCenter());
+                        });
+                }
+                else {
+                    // Browser doesn't support Geolocation
+                    handleLocationError(false, infoWindow, map.getCenter());
+                }
+            }
+
+            function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                infoWindow.setPosition(pos);
+                infoWindow.setContent(browserHasGeolocation ?
+                    'Error: The Geolocation service failed.' :
+                    'Error: Your browser doesnt support geolocation.');
+                infoWindow.open(map);
+            }
+
+        </script>*@
+    <script async defer
+            src=@ViewBag.API>
+    </script>
     @*<p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>*@
 
 </body>

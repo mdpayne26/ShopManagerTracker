@@ -60,7 +60,7 @@ namespace ManagerTracker.Controllers
                     db.Drivers.Add(drivers);
                     db.SaveChanges();
                 }
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("DistanceCreate", "Driver");
             }
             catch
             {
@@ -68,8 +68,11 @@ namespace ManagerTracker.Controllers
             }
         }
         
+        //GET
         public ActionResult DistanceCreate()
         {
+          
+            //ViewBag.API = "https://maps.googleapis.com/maps/api/js?key=" + APIKeys.GoogleAPI + "&callback=initMap";
             return View();
         }
         //GET:
@@ -94,6 +97,7 @@ namespace ManagerTracker.Controllers
         //    return View();
         //}
        
+        //POST
         [HttpPost]
         public ActionResult DistanceCreate(int id)
         {
