@@ -31,14 +31,14 @@ namespace ManagerTracker.Controllers
         }
 
         // GET: WorkOrder/Details/5
-        public ActionResult Details(int id, WorkOrders workorder)
+        public ActionResult Details(WorkOrders workOrders, int MechanicsId, string TrucksId, string TrailersId)
         {
-            
-                workorder.Trucks = db.Trucks.Where(p => p.Id == workorder.TrucksId).Single();
-                workorder.Trailers = db.Trailers.Where(s => s.Id == workorder.TrailersId).Single();
-                workorder.Mechanics = db.Mechanics.Where(m => m.Id == workorder.MechanicsId).Single();
-            
-            return View(db.WorkOrders.Find(id));
+
+
+           
+
+            return View();
+            //return View(db.WorkOrders.Find(id));
         }
 
         // GET: WorkOrder/Create
