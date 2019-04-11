@@ -7,15 +7,27 @@
 <h2>-WorkOrders-</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
-    @Html.ActionLink("List of Trailers", "Index", "Trailer")
+    @Html.ActionLink("Create New |", "Create")
+    @*@Html.ActionLink("Search |", "Search")*@
+    @Html.ActionLink("List of Trailers |", "Index", "Trailer")
     @Html.ActionLink("List of Trucks", "Index", "Truck")
 
 </p>
+<p>
+    @using (Html.BeginForm("Index", "WorkOrder", FormMethod.Get))
+    {
+        <b>Search By:</b> @Html.RadioButton("searchBy", "FirstName", true) <text>Mechanic</text>
+        @Html.RadioButton("searchBy", "TruckNumber") <text>Truck</text>
+        @Html.RadioButton("searchBy", "TrailerNumber") <text>Trailer</text><br />
+        @Html.TextBox("search") <input type="submit" value="search" />
+    }
+   
+</p>
 <table class="table">
+
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Mechanics.Id)
+            @Html.DisplayNameFor(model => model.Mechanics.FirstName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Trailers.Number)
@@ -50,7 +62,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Mechanics.Id)
+            @Html.DisplayFor(modelItem => item.Mechanics.FirstName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Trailers.Number)
