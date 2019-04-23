@@ -25,11 +25,11 @@ namespace ManagerTracker.Models
         // GET: Mechanic/Details/5
         public ActionResult Details(int id)
         {
+            
             try
             {
-                string userId = User.Identity.GetUserId();
-                var user = db.Mechanics.Where(c => c.ApplicationUserId == userId).Single();
-                return View(user);
+                var mechanic = db.Mechanics.Single(m => m.Id == id);
+                return View(mechanic);
             }
             catch
             {
