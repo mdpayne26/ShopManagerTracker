@@ -115,5 +115,31 @@ namespace ManagerTracker.Controllers
                 return View();
             }
         }
+
+        // GET: MANAGER WORKORDER CHARTS
+        public ActionResult TruckCharts()
+        {
+            return View();
+        }
+
+        // POST: MANAGER WORKORDER CHARTS
+        [HttpPost]
+        public ActionResult TruckCharts(int id)
+        {
+            return View();
+        }
+
+        // GET: MANAGER WORKORDER CHARTS
+        public ActionResult TrailerCharts()
+        {
+            return View();
+        }
+
+        // POST: MANAGER WORKORDER CHARTS
+        [HttpPost]
+        public ActionResult TrailerCharts(int id)
+        {
+            return View();
+        }
     }
 }

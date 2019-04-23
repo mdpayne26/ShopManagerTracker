@@ -511,6 +511,8 @@
     <Content Include="Views\Driver\DistanceCreate.cshtml" />
     <Content Include="Views\Driver\Confirmation.cshtml" />
     <Content Include="Views\WorkOrder\Search.cshtml" />
+    <Content Include="Views\Manager\TruckCharts.cshtml" />
+    <Content Include="Views\Manager\TrailerCharts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

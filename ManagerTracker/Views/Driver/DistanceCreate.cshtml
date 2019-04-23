@@ -8,52 +8,37 @@
 <html>
 <head>
     <h4>Repair Slip</h4>
-    @*<title>Geolocation</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <style>
-         Always set the map height explicitly to define the size of the div
-        * element that contains the map. 
-        #map {
-            height: 10%;
-        }
-         Optional: Makes the sample page fill the window. 
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-    </style>*@
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Distance Between Two Cities</title>
 </head>
 <body>
-    @*<div id="map"></div>*@
+    
+
+   
     <button onclick="getLocation()">Get Location</button>
     <p id="demo"></p>
     <script>
         var x = document.getElementById("demo");
 
-        function getLocation()
-        {
-            if (navigator.geolocation)
-            {
+        function getLocation() {
+            if (navigator.geolocation) {
                 navigator.geolocation.watchPosition(showPosition);
             }
-            else
-            {
+            else {
                 x.innerHTML = "Geolocation is not supported by this browser.";
             }
         }
 
-        function showPosition(position)
-        {
+        function showPosition(position) {
             x.innerHTML = "Latitude: " + position.coords.latitude +
                 "<br>Longitude: " + position.coords.longitude;
         }
 
-        function showError(error)
-        {
-            switch (error.code)
-            {
+        function showError(error) {
+            switch (error.code) {
                 case error.PERMISSION_DENIED:
                     x.innerHTML = "User denied the request for Geolocation."
                     break;
@@ -92,58 +77,13 @@
 
 
 
-    @*<script>
-            // Note: This example requires that you consent to location sharing when
-            // prompted by your browser. If you see the error "The Geolocation service
-            // failed.", it means you probably did not give permission for the browser to
-            // locate you.
-            var map, infoWindow;
-            function initMap() {
-                map = new google.maps.Map(document.getElementById('map'),
-                    {
-                        center: { lat: 43.045850, lng: -88.240250 },
-                        zoom: 6
-                    });
-                infoWindow = new google.maps.InfoWindow;
-
-                // Try HTML5 geolocation.
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function (position) {
-                        var pos =
-                        {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude
-                        };
-
-                        infoWindow.setPosition(pos);
-                        infoWindow.setContent('Location found.');
-                        infoWindow.open(map);
-                        map.setCenter(pos);
-                    },
-                        function () {
-                            handleLocationError(true, infoWindow, map.getCenter());
-                        });
-                }
-                else {
-                    // Browser doesn't support Geolocation
-                    handleLocationError(false, infoWindow, map.getCenter());
-                }
-            }
-
-            function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-                infoWindow.setPosition(pos);
-                infoWindow.setContent(browserHasGeolocation ?
-                    'Error: The Geolocation service failed.' :
-                    'Error: Your browser doesnt support geolocation.');
-                infoWindow.open(map);
-            }
-
-        </script>*@
+   
     <script async defer
             src=@ViewBag.API>
     </script>
     @*<p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>*@
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
 
