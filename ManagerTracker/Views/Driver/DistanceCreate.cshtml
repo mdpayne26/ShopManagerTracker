@@ -7,7 +7,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <br>
+    <br>
+    <br>
+    <br>
     <h4>Repair Slip</h4>
+    
+    <br>
+    <br>
     <style>
         #right-panel {
             font-family: 'Roboto','sans-serif';
@@ -34,8 +41,8 @@
         }
 
         #map {
-            height: 400px;
-            width: 800px;
+            height: 250px;
+            width: 450px;
         }
 
         #right-panel {
@@ -53,8 +60,9 @@
     <div id="right-panel">
         <div id="inputs">
             <pre>
-var origin1 = {lat: 43.033580, lng: -87.911910};
-var destinationA = '930 Silvernail rd Pewaukee Wi 53072';
+var origin = {lat: 43.033580, lng: -87.911910};
+@*var origin = xy;*@
+var destination = '930 Silvernail rd Pewaukee Wi 53072';
         </pre>
         </div>
         <div>
@@ -64,16 +72,30 @@ var destinationA = '930 Silvernail rd Pewaukee Wi 53072';
     </div>
     <div id="map"></div>
     <script>
-       
-      
+
+        var latlon;/* = position.coords.latitude + "," + position.coords.longitude;*/
+        //function getLocation() {
+            //if (navigator.geolocation) {
+            //    navigator.geolocation.getCurrentPosition(GetPosition);
+            //}
+            //function GetPosition(position) {
+            //    var origin = { lat: position.coords.latitude, lng: position.coords.longitude };
+            //}
+        
         function initMap() {
             var bounds = new google.maps.LatLngBounds;
             var markersArray = [];
-
-            var origin1 = { lat: 43.033580, lng: -87.911910 };
-            //var origin2 = 'Greenwich, England';
-            var destinationA = '930 Silvernail rd Pewaukee Wi 53072';
-            //var destinationB = { lat: 50.087, lng: 14.421 };
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(GetPosition);
+            }
+            
+            //current location
+            var origin = { lat: position.coords.latitude, lng: position.coords.longitude };
+            
+            //shop location
+            var destination = '930 Silvernail rd Pewaukee Wi 53072';
+            document.getElementById("right-panel").innerHTML = origin.toString();
+            
 
             var destinationIcon = 'https://chart.googleapis.com/chart?' +
                 'chst=d_map_pin_letter&chld=D|FF0000|000000';
@@ -87,8 +109,8 @@ var destinationA = '930 Silvernail rd Pewaukee Wi 53072';
 
             var service = new google.maps.DistanceMatrixService;
             service.getDistanceMatrix({
-                origins: [origin1],
-                destinations: [destinationA],
+                origins: [origin],
+                destinations: [destination],
                 travelMode: 'DRIVING',
                 unitSystem: google.maps.UnitSystem.IMPERIAL,
                 avoidHighways: false,
@@ -135,6 +157,9 @@ var destinationA = '930 Silvernail rd Pewaukee Wi 53072';
             });
         }
 
+        function GetPosition(position) {
+                var origin = "{ lat: " + position.coords.latitude + ",  lng: " + position.coords.longitude + "}";
+            }
         function deleteMarkers(markersArray) {
             for (var i = 0; i < markersArray.length; i++) {
                 markersArray[i].setMap(null);
