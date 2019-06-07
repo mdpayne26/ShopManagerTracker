@@ -8,85 +8,285 @@
 <html>
 <head>
     <h4>Repair Slip</h4>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Distance Between Two Cities</title>
+    <style>
+        #right-panel {
+            font-family: 'Roboto','sans-serif';
+            line-height: 30px;
+            padding-left: 10px;
+        }
+
+            #right-panel select, #right-panel input {
+                font-size: 15px;
+            }
+
+            #right-panel select {
+                width: 100%;
+            }
+
+            #right-panel i {
+                font-size: 12px;
+            }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            height: 400px;
+            width: 800px;
+        }
+
+        #right-panel {
+            float: right;
+            width: 48%;
+            padding-left: 2%;
+        }
+
+        #output {
+            font-size: 11px;
+        }
+    </style>
 </head>
 <body>
-    
-
-   
-    <button onclick="getLocation()">Get Location</button>
-    <p id="demo"></p>
+    <div id="right-panel">
+        <div id="inputs">
+            <pre>
+var origin1 = {lat: 43.033580, lng: -87.911910};
+var destinationA = '930 Silvernail rd Pewaukee Wi 53072';
+        </pre>
+        </div>
+        <div>
+            <strong>Results</strong>
+        </div>
+        <div id="output"></div>
+    </div>
+    <div id="map"></div>
     <script>
+       
+      
+        function initMap() {
+            var bounds = new google.maps.LatLngBounds;
+            var markersArray = [];
+
+            var origin1 = { lat: 43.033580, lng: -87.911910 };
+            //var origin2 = 'Greenwich, England';
+            var destinationA = '930 Silvernail rd Pewaukee Wi 53072';
+            //var destinationB = { lat: 50.087, lng: 14.421 };
+
+            var destinationIcon = 'https://chart.googleapis.com/chart?' +
+                'chst=d_map_pin_letter&chld=D|FF0000|000000';
+            var originIcon = 'https://chart.googleapis.com/chart?' +
+                'chst=d_map_pin_letter&chld=O|FFFF00|000000';
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 43.784439, lng: -88.787865 },
+                zoom: 10
+            });
+            var geocoder = new google.maps.Geocoder;
+
+            var service = new google.maps.DistanceMatrixService;
+            service.getDistanceMatrix({
+                origins: [origin1],
+                destinations: [destinationA],
+                travelMode: 'DRIVING',
+                unitSystem: google.maps.UnitSystem.IMPERIAL,
+                avoidHighways: false,
+                avoidTolls: false
+            }, function (response, status) {
+                if (status !== 'OK') {
+                    alert('Error was: ' + status);
+                } else {
+                    var originList = response.originAddresses;
+                    var destinationList = response.destinationAddresses;
+                    var outputDiv = document.getElementById('output');
+                    outputDiv.innerHTML = '';
+                    deleteMarkers(markersArray);
+
+                    var showGeocodedAddressOnMap = function (asDestination) {
+                        var icon = asDestination ? destinationIcon : originIcon;
+                        return function (results, status) {
+                            if (status === 'OK') {
+                                map.fitBounds(bounds.extend(results[0].geometry.location));
+                                markersArray.push(new google.maps.Marker({
+                                    map: map,
+                                    position: results[0].geometry.location,
+                                    icon: icon
+                                }));
+                            } else {
+                                alert('Geocode was not successful due to: ' + status);
+                            }
+                        };
+                    };
+
+                    for (var i = 0; i < originList.length; i++) {
+                        var results = response.rows[i].elements;
+                        geocoder.geocode({ 'address': originList[i] },
+                            showGeocodedAddressOnMap(false));
+                        for (var j = 0; j < results.length; j++) {
+                            geocoder.geocode({ 'address': destinationList[j] },
+                                showGeocodedAddressOnMap(true));
+                            outputDiv.innerHTML += originList[i] + ' to ' + destinationList[j] +
+                                ': ' + results[j].distance.text + ' in ' +
+                                results[j].duration.text + '<br>';
+                        }
+                    }
+                }
+            });
+        }
+
+        function deleteMarkers(markersArray) {
+            for (var i = 0; i < markersArray.length; i++) {
+                markersArray[i].setMap(null);
+            }
+            markersArray = [];
+      
+        }
         var x = document.getElementById("demo");
 
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.watchPosition(showPosition);
-            }
-            else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
-            }
-        }
-
-        function showPosition(position) {
-            x.innerHTML = "Latitude: " + position.coords.latitude +
-                "<br>Longitude: " + position.coords.longitude;
-        }
-
-        function showError(error) {
-            switch (error.code) {
-                case error.PERMISSION_DENIED:
-                    x.innerHTML = "User denied the request for Geolocation."
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    x.innerHTML = "Location information is unavailable."
-                    break;
-                case error.TIMEOUT:
-                    x.innerHTML = "The request to get user location timed out."
-                    break;
-                case error.UNKNOWN_ERROR:
-                    x.innerHTML = "An unknown error occurred."
-                    break;
-            }
-        }
+        //function getLocation() {
+        //    if (navigator.geolocation) {
+        //        navigator.geolocation.watchPosition(showPosition);
+        //    }
+        //    else {
+        //        x.innerHTML = "Geolocation is not supported by this browser.";
+        //    }
+        //}
+        //var position1 = position.coords.latitude;
+        //console.log(getLocation());
     </script>
-
-    <form action="/action_page.php" target="_blank" method="POST">
-        <fieldset>
-            @*<legend>Repair information</legend>*@
-            Truck Number:<br>
-            <input type="text" name="TruckNumber" value="PJ 1">
-            <br>
-            Trailer Number:<br>
-            <input type="text" name="TrailerNumber" value="T 1">
-            <br>
-            Repairs Needed:<br>
-            <textarea name="RepairsNeeded" rows="10" cols="90">Air leaks.</textarea>
-            <br><br>
-            <input type="submit" value="Submit">
-        </fieldset>
-    </form>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwO1MatEZ-C6o0Q9jjCFsEkI1myPuAph0&callback=initMap">
+    </script>
+@*</body>
+</html>*@
 
 
 
 
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <h4>Repair Slip</h4>
+        <meta name="viewport" content="initial-scale=1.0">
+        <meta charset="utf-8">
+        @*<style>
+             /* Always set the map height explicitly to define the size of the div
+            * element that contains the map. */
+             /*#map {
+                 height: 100%;
+             }*/
+             /* Optional: Makes the sample page fill the window. */
+             /*html, body {
+                 height: 50%;
+                 margin: 10%;
+                 padding: 0;
+             }*/
+        </style>
+    </head>
+    <body>
+        <div id="map" style="width: 800px; height: 400px;"></div>
+        <script>
+            var map;
+            function initMap()
+            {
+                map = new google.maps.Map(document.getElementById('map'),
+                    {
+                        center: { lat: 43.045850, lng: -88.240250 },
+                    zoom: 12
+                });
+            }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwO1MatEZ-C6o0Q9jjCFsEkI1myPuAph0&callback=initMap"
+                async defer></script>
+    </body>
+    </html>*@
+
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        @*<h4>Repair Slip</h4>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <link rel="stylesheet" href="css/style.css">
+            <title>Distance Between Two Cities</title>
+    </head>*@
 
 
 
-   
-    @*<script async defer
+
+@*<button onclick="getLocation()">Get Location</button>
+<p id="demo"></p>
+<script>
+    var x = document.getElementById("demo");
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(showPosition);
+        }
+        else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+        x.innerHTML = "Latitude: " + position.coords.latitude +
+            "<br>Longitude: " + position.coords.longitude;
+    }
+
+    function showError(error)
+    {
+        switch (error.code)
+        {
+            case error.PERMISSION_DENIED:
+                x.innerHTML = "User denied the request for Geolocation."
+                break;
+            case error.POSITION_UNAVAILABLE:
+                x.innerHTML = "Location information is unavailable."
+                break;
+            case error.TIMEOUT:
+                x.innerHTML = "The request to get user location timed out."
+                break;
+            case error.UNKNOWN_ERROR:
+                x.innerHTML = "An unknown error occurred."
+                break;
+        }
+    }
+</script>*@
+
+<form action="/action_page.php" target="_blank" method="POST">
+    <fieldset>
+        <legend>Repair information</legend>
+        Truck Number:<br>
+        <input type="text" name="TruckNumber" value="PJ 1">
+        <br>
+        Trailer Number:<br>
+        <input type="text" name="TrailerNumber" value="T 1">
+        <br>
+        Repairs Needed:<br>
+        <textarea name="RepairsNeeded" rows="10" cols="90">Air leaks.</textarea>
+        <br><br>
+        <input type="submit" value="Submit">
+    </fieldset>
+</form>
+
+
+
+
+
+
+
+
+@*<script async defer
             src=@ViewBag.API>
     </script>
     @*<p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/main.js"></script>*@
 </body>
-</html>
+    </html>
 
-@*<div>
+<div>
     @Html.ActionLink("Back to List", "Index")
-</div>*@
+</div>
