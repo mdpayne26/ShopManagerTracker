@@ -16,6 +16,7 @@ namespace ManagerTracker.Controllers
         public DriverController()
         {
             db = new ApplicationDbContext();
+           
         }
 
         // GET: Driver
@@ -68,14 +69,17 @@ namespace ManagerTracker.Controllers
             }
         }
         
-        //GET
+        //GET: Distance/Create
         public ActionResult DistanceCreate()
         {
-          
-            return View();
+            
+
+
+            
+                return View();
         }
        
-        //POST
+        //POST: Distance/Create
         [HttpPost]
         public ActionResult DistanceCreate(int id)
         {
