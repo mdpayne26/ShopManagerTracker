@@ -12,6 +12,7 @@ namespace ManagerTracker.Controllers
 {
     public class DriverController : Controller
     {
+        
         ApplicationDbContext db;
         public DriverController()
         {
@@ -73,7 +74,7 @@ namespace ManagerTracker.Controllers
         public ActionResult DistanceCreate()
         {
             
-
+            //ViewBag.Origin = 
 
             
                 return View();
