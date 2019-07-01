@@ -7,32 +7,33 @@
 <h2>Index</h2>
 
 <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Subject)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Start)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.End)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ThemeColor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsFullDay)
-            </th>
-            <th></th>
-        </tr>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Start)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.End)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThemeColor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsFullDay)
+        </th>
+        <th></th>
+    </tr>
 
-    @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Subject)
@@ -53,25 +54,31 @@
                 @Html.DisplayFor(modelItem => item.IsFullDay)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
     }
 
-    </table>
+</table>
 
 
 <div id="calender"></div>
 
 
-<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.1.0/fullcalendar.min.css" rel="stylesheet" />
-<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.1.0/fullcalendar.print.css" rel="stylesheet" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" />
+@*<link href='fullcalendar/core/main.css' rel='stylesheet' />
+<link href='fullcalendar/daygrid/main.css' rel='stylesheet' />*@
+
+
 
 @section Scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.1.0/fullcalendar.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+    @*<script src='fullcalendar/core/main.js'></script>
+    <script src='fullcalendar/daygrid/main.js'></script>*@
 
     <script>
         $(document).ready(function () {
@@ -110,9 +117,21 @@
                     },
                     eventLimit: true,
                     eventColor: '#378006',
-                    events: events
+                    events: events,
+                    eventClick: function (calEvent, JsEvent, view) {
+                        $('#myModel #eventTitle').text(calEvent.title);
+                        var $description - $('<div/>');
+                        $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start.format("DD-MM-YYYY HH:mm a")));
+                        if (calEvent.end != null) {
+                            $description.append($('<p/>').html('<b>End:</b>' + calEvent.end.format("DD-MM-YYYY HH:mm a")));
+                        }
+                        $description.append($('<p/>').html('<b>Description:</b>' + calEvent.description));
+                        $('#myModel #pDetails').empty().html($description);
+
+                        $('#myModel').model();
+                    }
                 })
             }
         })
     </script>
-    }
+}

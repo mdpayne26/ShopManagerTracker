@@ -18,6 +18,7 @@ namespace ManagerTracker.Controllers
         public ActionResult Index()
         {
             return View(db.Events.ToList());
+            //return View();
         }
 
         public JsonResult GetEvents()
