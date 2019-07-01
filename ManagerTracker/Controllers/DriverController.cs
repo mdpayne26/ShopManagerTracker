@@ -138,5 +138,17 @@ namespace ManagerTracker.Controllers
                 return View();
             }
         }
+        //GET: Driver/Confirmation
+        //public ActionResult Confirmation()
+        //{
+        //    return View();
+        //}
+
+        //POST: Driver/Confirmation
+        [HttpPost]
+        public ActionResult Confirmation()
+        {
+            return View();
+        }
     }
 }

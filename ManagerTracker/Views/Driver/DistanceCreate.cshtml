@@ -27,7 +27,7 @@
             }
 
             #right-panel select {
-                width: 100%;
+                width: 0%;
             }
 
             #right-panel i {
@@ -52,7 +52,7 @@
         }
 
         #output {
-            font-size: 11px;
+            font-size: 15px;
         }
     </style>
 </head>
@@ -72,74 +72,60 @@
     </div>
     <div id="map"></div>
     <script>
-        function initMap()
-        {
+        function initMap() {
             var bounds = new google.maps.LatLngBounds;
             var markersArray = [];
+
+            var origin = { lat: 43.033580, lng: -87.911910 };
+            //var origin = new google.maps.LatLng(43.033580, -87.911910);
            
-            //var origin: = { lat: 43.033580, lng: -87.911910 };
-            //var infoWindow;
-            var origin;
-            if (navigator.geolocation)
-            {
-                navigator.geolocation.getCurrentPosition(function (position)
-                {
-                    origin =
-                        {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude
-                        };
-
-
-                    //document.getElementById("right-panel").innerHTML = origin.lat.toString();
-                    document.getElementById("right-panel").innerHTML = "Lat: " + origin.lat.toString() + ", " + "Lon: " + origin.lng.toString();
-                    //infoWindow.setPosition(origin);
-                    //infoWindow.setContent('Location found.');
-                    //infoWindow.open(map);
-                    //map.setCenter(pos);
-                },  null, null //  function ()
-                    //
-                //    null;
-                    //handleLocationError(true, infoWindow, { lat: 43.033580, lng: -87.911910 });
-                    //});
-            )   // else { null
-            //    // Browser doesn't support Geolocation
-            //    //handleLocationError(false, infoWindow, map.getCenter());
-            //    //handleLocationError(false, infoWindow, { lat: 43.033580, lng: -87.911910 });
+            //var origin;
+            //if (navigator.geolocation) {
+            //    navigator.geolocation.getCurrentPosition(function (position) {
+            //         origin =
+            //        {
+            //            lat: position.coords.latitude,
+            //            lng: position.coords.longitude
+            //        };
+            //    }, null, null);
             //}
-        }
+            //document.getElementById("right-panel").innerHTML = "Lat: " + origin.lat.toString() + ", " + "Lon: " + origin.lng.toString();
+            //document.getElementById("right-panel").innerHTML = "Lat: " + position.coords.latitude.toString() + ", " + "Lon: " + origin.lng.toString();
 
-        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-            infoWindow.setPosition(pos);
-            infoWindow.setContent(browserHasGeolocation ?
-                'Error: The Geolocation service failed.' :
-                'Error: Your browser doesn\'t support geolocation.');
-            infoWindow.open(map);
-        }
-             //var origin = { origin };
-            var destination = '930 Silvernail rd Pewaukee Wi 53072';
             
+        
+        
+                
+            //var origin;
+            //var origin = {origin};
+            var destination = '930 Silvernail rd Pewaukee Wi 53072';
+            //document.getElementById("right-panel").innerHTML = "Lat: " + origin.lat.toString() + ", " + "Lon: " + origin.lng.toString();
+            //document.getElementById("right-panel").innerHTML = position.coords.latitude; //"Lat: " + origin.lat.toString() + ", " + "Lon: " + origin.lng.toString();*/
+
 
             var destinationIcon = 'https://chart.googleapis.com/chart?' +
                 'chst=d_map_pin_letter&chld=D|FF0000|000000';
             var originIcon = 'https://chart.googleapis.com/chart?' +
                 'chst=d_map_pin_letter&chld=O|FFFF00|000000';
-            var map = new google.maps.Map(document.getElementById('map'), {
+            var map = new google.maps.Map(document.getElementById('map'),
+            {
                 //center: { lat: 43.784439, lng: -88.787865 },
-                center: { lat: 43.045760, lng: -88.240019 },
+                center: { lat: 43.045849, lng: -88.240250 },
                 zoom: 15
             });
             var geocoder = new google.maps.Geocoder;
 
             var service = new google.maps.DistanceMatrixService;
-            service.getDistanceMatrix({
+            service.getDistanceMatrix(
+            {
                 origins: [origin],
                 destinations: [destination],
                 travelMode: 'DRIVING',
                 unitSystem: google.maps.UnitSystem.IMPERIAL,
                 avoidHighways: false,
                 avoidTolls: false
-            }, function (response, status) {
+            }, function (response, status)
+                {
                 if (status !== 'OK') {
                     alert('Error was: ' + status);
                 } else {
@@ -168,7 +154,7 @@
                     for (var i = 0; i < originList.length; i++) {
                         var results = response.rows[i].elements;
                         geocoder.geocode({ 'address': originList[i] },
-                            showGeocodedAddressOnMap(true));
+                            showGeocodedAddressOnMap(false));
                         for (var j = 0; j < results.length; j++) {
                             geocoder.geocode({ 'address': destinationList[j] },
                                 showGeocodedAddressOnMap(true));
@@ -394,7 +380,7 @@
     }
 </script>*@
 
-<form action="/action_page.php" target="_blank" method="POST">
+<form action="~/Driver/Confirmation" target="Confirmation" method="POST">
     <fieldset>
         <legend>Repair information</legend>
         Truck Number:<br>
