@@ -7,9 +7,10 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create") |
+    @Html.ActionLink("Calendar View", "GetEvents")
 </p>
-<table class="table">
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Subject)
@@ -61,7 +62,7 @@
         </tr>
     }
 
-</table>
+</table>*@
 
 
 <div id="calender"></div>
@@ -105,11 +106,11 @@
             })
 
             function GenerateCalender(events) {
-                $('#calender').fullCalendar('destroy');
-                $('#calender').fullCalendar({
+                $('#calender').fullCalender('destroy');
+                $('#calender').fullCalender({
                     contentHeight: 400,
                     defaultDate: new Date(),
-                    timeFormat: 'h(mm)a',
+                    timeFormat: 'h(:mm)a',
                     header: {
                         left: 'prev,next today',
                         center: 'title',

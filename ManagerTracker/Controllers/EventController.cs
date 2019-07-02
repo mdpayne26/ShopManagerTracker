@@ -23,8 +23,12 @@ namespace ManagerTracker.Controllers
 
         public JsonResult GetEvents()
         {
-            var events = db.Events.ToList();
-            return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var events = db.Events.ToList();
+                return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+            
         }
 
         // GET: Events/Details/5
