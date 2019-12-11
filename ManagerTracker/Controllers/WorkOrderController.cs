@@ -67,14 +67,35 @@ namespace ManagerTracker.Controllers
         }
 
         // GET: WorkOrder/Details/5
-        public ActionResult Details(int id, int MechanicsId, string TrucksId, string TrailersId)
+        public ActionResult Details(int id, int? MechanicsId, string TrucksId, string TrailersId, WorkOrders workOrder)
         {
-            ViewBag.MechanicsId = new SelectList(db.Mechanics.Select(m => m.Id));
-            // ViewBag.MechanicsId = new SelectList(db.Mechanics.ToList(), "Id", "FirstName");
-            ViewBag.TrucksId = new SelectList(db.Trucks.Select(t => t.Number));
-            ViewBag.TrailersId = new SelectList(db.Trailers.Select(r => r.Number));
-            return View(db.WorkOrders.Find(id));
-            //return View(db.WorkOrders.Find(id));
+            try
+            {
+                //var mechanic = db.Mechanics.Single(m => m.Id == id);
+                //
+                //ViewBag.MechanicsId = new SelectList(db.Mechanics.ToList(), "Id", "FirstName");
+                //ViewBag.TrucksId = new SelectList(db.Trucks.Select(t => t.Number));
+                //ViewBag.TrailersId = new SelectList(db.Trailers.Select(r => r.Number));
+                //ViewBag.MechanicsId = new SelectList(db.Mechanics.Select(m => m.FirstName));
+                //ViewBag.Mechanics = db.Mechanics.Where(m => m.Id).Select(m => m.FirstName);
+
+                //workOrders.TrucksId = db.Trucks.Where(t => t.Number == TrucksId).Single().Id;
+                //workOrders.TrailersId = db.Trailers.Where(r => r.Number == TrailersId).Single().Id;
+                //workOrders.MechanicsId = db.Mechanics.Where(m => m.FirstName == FirstName).Single().Id;
+
+                workOrder.Trucks = db.Trucks.Where(p => p.Id == workOrder.TrucksId).Single();
+                workOrder.Trailers = db.Trailers.Where(s => s.Id == workOrder.TrailersId).Single();
+                workOrder.Mechanics = db.Mechanics.Where(m => m.Id == workOrder.MechanicsId).Single();
+
+                return View(db.WorkOrders.Find(id));
+                //var workOrder = db.WorkOrders.Single(w => w.Id == id);
+                //return View(workOrder);
+            }
+            catch
+            {
+                return RedirectToAction("Index");
+            }
+            
         }
 
         // GET: WorkOrder/Create

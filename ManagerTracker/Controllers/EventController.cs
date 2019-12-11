@@ -21,14 +21,14 @@ namespace ManagerTracker.Controllers
             //return View();
         }
 
-        public JsonResult GetEvents()
+        public /*JsonResult*/ActionResult GetEvents()
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                var events = db.Events.ToList();
-                return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-            }
-            
+            //using (ApplicationDbContext db = new ApplicationDbContext())
+            //{
+            //    var events = db.Events.ToList();
+            //    return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            //}
+            return View();
         }
 
         // GET: Events/Details/5

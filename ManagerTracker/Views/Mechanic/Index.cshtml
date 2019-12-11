@@ -10,7 +10,13 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
+    <thead>
+        <tr>
+            <th rowspan=2>First Name</th>
+            <th rowspan=2>Last Name</th>
+        </tr>
+    </thead>
+    @*<tr>
         <th>
             @Html.DisplayNameFor(model => model.Id)
         </th>
@@ -22,15 +28,15 @@
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.Role)
-        </th>*@
+        </th>
         <th></th>
-    </tr>
+    </tr>*@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Id)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.FirstName)
         </td>

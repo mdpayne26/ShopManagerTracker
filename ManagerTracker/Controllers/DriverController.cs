@@ -32,9 +32,13 @@ namespace ManagerTracker.Controllers
         {
             try
             {
-                string userId = User.Identity.GetUserId();
-                var user = db.Drivers.Where(c => c.ApplicationUserId == userId).Single();
-                return View(user);
+                var driver = db.Drivers.Single(d => d.Id == id);
+                return View(driver);
+                //string userId = User.Identity.GetUserId();
+                //var user = db.Drivers.Where(c => c.ApplicationUserId == userId).Single();
+                //return View(user);
+                //var mechanic = db.Mechanics.Single(m => m.Id == id);
+                //return View(mechanic);
             }
             catch
             {

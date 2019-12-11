@@ -24,80 +24,94 @@
    
 </p>
 <table class="table">
+    <thead>
+        <tr>
+            <th rowspan=4>First Name</th>
+            <th rowspan=4>Trailer Number</th>
+            <th rowspan=4>Truck Number</th>
+            <th rowspan=4>Date</th>
+            <th rowspan=4>Start Time</th>
+            <th rowspan=4>End Time</th>
+            <th rowspan=4>Part Number or Description</th>
+            <th rowspan=4>Part Quantities</th>
+            <th rowspan=4>Part Price</th>
+            <th rowspan=4>Repair Story</th>
+        </tr>
+    </thead>
+    @*<tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Mechanics.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Trailers.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Trucks.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PartNumberOrDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PartQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PartPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RepairDescription)
+            </th>
+            <th></th>
+        </tr>*@
 
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Mechanics.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Trailers.Number)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Trucks.Number)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PartNumberOrDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PartQuantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PartPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RepairDescription)
-        </th>
-        <th></th>
-    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mechanics.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Trailers.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Trucks.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartNumberOrDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RepairDescription)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Mechanics.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Trailers.Number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Trucks.Number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PartNumberOrDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PartQuantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PartPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RepairDescription)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-    
-}
+    }
 
 </table>
